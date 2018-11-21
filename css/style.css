@@ -1,17 +1,17 @@
 /* FONTS */
 @font-face {
     font-family: OpenSans-Regular;
-    src: url(../fonts/Open_Sans/OpenSans-Regular.ttf);
+    src: url(../fonts/OpenSans/OpenSans-Regular.ttf);
 }
 
 @font-face {
     font-family: OpenSans-Bold;
-    src: url(../fonts/Open_Sans/OpenSans-Bold.ttf);
+    src: url(../fonts/OpenSans/OpenSans-Bold.ttf);
 }
 
 @font-face {
     font-family: OpenSans-Light;
-    src: url(../fonts/Open_Sans/OpenSans-Light.ttf);
+    src: url(../fonts/OpenSans/OpenSans-Light.ttf);
 }
 /* HTML ELEMENTS */
 body{
@@ -19,6 +19,7 @@ body{
     margin: 0;
     background-color: #eee;
     font-family: OpenSans-Regular;
+    color: #333;
 }
 
 /* HEADER */
@@ -82,8 +83,69 @@ body{
 }
 
 /* CONTENT */
-#content{
-    width: 60%;
+#container{
+    width: 70%;
     height: auto;
+    margin: 100px auto;
+}
+
+/* CONTENT*/
+.content{
+    width: 100%;
+    height: 300px;
+    border: 2px solid #333;
+}
+
+.content p{
+    text-align: center;
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 2em;
+}
+
+.content table{
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+.content td, th{
+    text-align: left;
+    padding: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #aaa;
+}
+
+/* LOGIN */
+#login{
     margin: 0 auto;
+    width: 50%;
+    height: 300px;
+    border: 2px solid #333;
+}
+
+#login form{
+    width: 90%;
+    margin: 0 auto;
+}
+
+#login input{
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+}
+
+#login button{
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
+}
+
+#login p{
+    text-align: center;
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 3em;
 }

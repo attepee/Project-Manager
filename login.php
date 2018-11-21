@@ -2,23 +2,20 @@
     <head>
         <title>Projects | Project Manager</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="fonts/fontawesome/css/all.min.css">
     </head>
     <body>
-        <div id="header">
-            <div id=logo>
-                <p>Project Manager</p>
+        <div id="container">
+            <div id="login">
+                <form>
+                    <p>Project Manager</p>
+                    <label>Username</label><br>
+                    <input type="text"><br>
+                    <label>Password</label><br>
+                    <input type="password"><br>
+                    <button type="submit">Login <i class="fas fa-sign-in-alt"></i></button>
+                </form>
             </div>
-            <div id="navBar">
-                <ul>
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">Statistics</a></li>
-                    <li><a href="#">Project</a></li>
-                    <li><a href="#">Home</a></li>
-                </ul>
-            </div>
-        </div>
-        <div id="content">
-
         </div>
     </body>
 </html>
