@@ -1,0 +1,89 @@
+/* FONTS */
+@font-face {
+    font-family: OpenSans-Regular;
+    src: url(../fonts/Open_Sans/OpenSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: OpenSans-Bold;
+    src: url(../fonts/Open_Sans/OpenSans-Bold.ttf);
+}
+
+@font-face {
+    font-family: OpenSans-Light;
+    src: url(../fonts/Open_Sans/OpenSans-Light.ttf);
+}
+/* HTML ELEMENTS */
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #eee;
+    font-family: OpenSans-Regular;
+}
+
+/* HEADER */
+#header{
+    width: 100%;
+    height: auto;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    align-content: center;
+}
+
+#navBar{
+    width: 50%;
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#navbar li{
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar li a{
+    display: block;
+    color: #eee;
+    text-align: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    -webkit-transition: background 0.3s linear;
+    -moz-transition: background 0.3s linear;
+    -ms-transition: background 0.3s linear;
+    -o-transition: background 0.3s linear;
+    transition: background 0.3s linear;
+}
+#navbar li a:hover, a:focus{
+    background-color: #222;
+}
+
+#logo{
+    width: 50%;
+    float: left;
+    color: #eee;
+}
+
+#logo p{
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 2em;
+}
+
+/* CONTENT */
+#content{
+    width: 60%;
+    height: auto;
+    margin: 0 auto;
+}
