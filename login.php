@@ -34,7 +34,7 @@
     </head>
     <body>
         <div id="container">
-            <div id="login">
+            <div id="form">
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
                     <p><i class="fas fa-project-diagram"></i>Project Manager</p>
                     <label>Username</label><br>

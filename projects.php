@@ -1,10 +1,10 @@
 <?php
-    require_once("php/config.php");
     require_once("php/session.php");
 
     $errmsg = "OK";
+    $userID = $_SESSION["userID"];
 
-    $stmt = $db->query("SELECT projectID, title, due_date, owner FROM projects");
+    $stmt = $db->query("SELECT projectID, title, due_date, owner FROM projects WHERE owner = '$userID' ORDER BY due_date ASC");
 ?>
 
 <html>
@@ -14,20 +14,9 @@
         <link rel="stylesheet" type="text/css" href="fonts/fontawesome/css/all.min.css">
   </head>
     <body>
-        <div id="header">
-            <div id=logo>
-                <p><i class="fas fa-project-diagram"></i>Project Manager</p>
-            </div>
-            <div id="navBar">
-                <ul>
-                    <li><a href="logout.php">Logout <i class="fas fa-sign-out-alt"></i></a></li>
-                    <li><a href="profile.php">Settings <i class="fas fa-cog"></i></a></li>
-                    <li><a href="statistics.php">Statistics <i class="fas fa-chart-bar"></i></a></li>
-                    <li><a href="projects.php">Projects <i class="fas fa-project-diagram"></i></a></li>
-                    <li><a href="home.php">Home <i class="fas fa-home"></i></a></li>
-                </ul>
-            </div>
-        </div>
+        <?php
+            include("header.php");
+        ?>
         <div id="container">
             <a href="newProject.php"><button>New project</button></a>
             <div class="content">

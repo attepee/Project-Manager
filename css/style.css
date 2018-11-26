@@ -66,7 +66,7 @@ body{
     -o-transition: background 0.3s linear;
     transition: background 0.3s linear;
 }
-#navbar li a:hover, a:focus{
+#navbar li a:hover, #navbar a:focus{
     background-color: #222;
 }
 
@@ -92,7 +92,6 @@ body{
 /* CONTENT*/
 .content{
     width: 100%;
-    height: 300px;
 }
 
 .content p{
@@ -117,35 +116,55 @@ tr:nth-child(even) {
     background-color: #aaa;
 }
 
-/* LOGIN */
-#login{
+.content a, .content a:visited{
+    text-decoration: none;
+    color: #333;
+}
+
+.content a:hover, .content a:focus{
+    text-decoration: underline;
+    color: #111;
+}
+
+/* FORM */
+#form{
     margin: 0 auto;
     width: 50%;
 }
 
-#login form{
+#form form{
     width: 90%;
     margin: 0 auto;
 }
 
-#login label{
+#form label{
     display: inline-block;
     margin-top: 10px;
 }
 
-#login input{
+#form input, #form select{
     width: 100%;
     height: 30px;
     margin-top: 10px;
 }
 
-#login button{
+#form textarea{
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    height: 200px;
+    max-height: 1000px;
+    min-height: 200px;
+    margin-top: 10px;
+}
+
+#form button{
     width: 100%;
     height: 30px;
     margin-top: 10px;
 }
 
-#login p{
+#form p{
     text-align: center;
     margin: 0;
     padding: 5px 10px;

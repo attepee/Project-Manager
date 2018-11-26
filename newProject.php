@@ -1,5 +1,4 @@
 <?php
-    require_once("php/config.php");
     require_once("php/session.php");
 
     $errmsg = "OK";
@@ -29,22 +28,11 @@
         <link rel="stylesheet" type="text/css" href="fonts/fontawesome/css/all.min.css">
     </head>
     <body>
-        <div id="header">
-            <div id=logo>
-                <p><i class="fas fa-project-diagram"></i>Project Manager</p>
-            </div>
-            <div id="navBar">
-                <ul>
-                    <li><a href="logout.php">Logout <i class="fas fa-sign-out-alt"></i></a></li>
-                    <li><a href="profile.php">Settings <i class="fas fa-cog"></i></a></li>
-                    <li><a href="statistics.php">Statistics <i class="fas fa-chart-bar"></i></a></li>
-                    <li><a href="projects.php">Projects <i class="fas fa-project-diagram"></i></a></li>
-                    <li><a href="home.php">Home <i class="fas fa-home"></i></a></li>
-                </ul>
-            </div>
-        </div>
+        <?php
+            include("header.php");
+        ?>
         <div id="container">
-            <div class="content">
+            <div id="form">
                 <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
                     <label>Project title</label><br>
                     <input type="text" name="title" required><br>

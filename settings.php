@@ -1,5 +1,10 @@
 <?php
     require_once("php/session.php");
+
+    $errmsg = "OK";
+    $userID = $_SESSION["userID"];
+
+    $stmt = $db->query("SELECT userID, username, firstname, lastname, admin FROM users");
 ?>
 
 <html>
@@ -9,23 +14,33 @@
         <link rel="stylesheet" type="text/css" href="fonts/fontawesome/css/all.min.css">
     </head>
     <body>
-        <div id="header">
-            <div id=logo>
-                <p><i class="fas fa-project-diagram"></i>Project Manager</p>
-            </div>
-            <div id="navBar">
-                <ul>
-                    <li><a href="logout.php">Logout <i class="fas fa-sign-out-alt"></i></a></li>
-                    <li><a href="profile.php">Settings <i class="fas fa-cog"></i></a></li>
-                    <li><a href="statistics.php">Statistics <i class="fas fa-chart-bar"></i></a></li>
-                    <li><a href="projects.php">Projects <i class="fas fa-project-diagram"></i></a></li>
-                    <li><a href="home.php">Home <i class="fas fa-home"></i></a></li>
-                </ul>
-            </div>
-        </div>
+        <?php
+            include("header.php");
+        ?>
         <div id="container">
             <div class="content">
-
+                <a href="newUser.php"><button>New user</button></a>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>username</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Admin status</th>
+                        <th></th>
+                    </tr>
+                    <?php
+                        while ($row = $stmt->fetch()) {
+                            echo "<tr>
+                                    <td>".$row['userID']."</td>
+                                    <td>"."<a href='.php?userID=".$row['userID']."'>".$row['username']."</a>"."</td>
+                                    <td>".$row['firstname']."</td>
+                                    <td>".$row['lastname']."</td>
+                                    <td>".$row['admin']."</td>
+                                </a></tr>";
+                        }
+                    ?>
+                </table>
             </div>
         </div>
     </body>

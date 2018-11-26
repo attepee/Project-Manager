@@ -5,5 +5,5 @@
         unset($_SESSION['app2_islogged']);
     }
 
-    header("Location: login.php");
+    header("Location: ../login.php");
 ?>
