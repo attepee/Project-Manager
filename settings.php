@@ -12,7 +12,7 @@
 
 <html>
     <head>
-        <title>Profile | Project Manager</title>
+        <title>Settings | Project Manager</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="fonts/fontawesome/css/all.min.css">
     </head>

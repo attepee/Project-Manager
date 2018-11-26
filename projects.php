@@ -28,7 +28,7 @@
                         while ($row = $stmt->fetch()) {
                             echo "<tr>
                                     <td>".$row['projectID']."</td>
-                                    <td>"."<a href='project.php?projectID=".$row['projectID']."'>".$row['title']."</a>"."</td>
+                                    <td>"."<a href='project.php?id=".$row['projectID']."'>".$row['title']."</a>"."</td>
                                     <td>".$row['due_date']."</td>
                                     <td>".$row['owner']."</td>
                                 </a></tr>";

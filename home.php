@@ -19,7 +19,7 @@
         ?>
         <div id="container">
             <div class="content">
-                <p>Your projects</p>
+                <h1>Your projects</h1>
                 <table>
                     <tr>
                         <th>ID</th>
@@ -38,10 +38,10 @@
                 </table>
             </div>
             <div class="content">
-                <p>Your tasks</p>
+                <h1>Your tasks</h1>
             </div>
             <div class="content">
-                <p>Hours worked this week</p>
+                <h1>Hours worked this week</h1>
             </div>
         </div>
     </body>

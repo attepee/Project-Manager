@@ -28,7 +28,7 @@
 
 <html>
     <head>
-        <title>Projects | Project Manager</title>
+        <title>Project Manager</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="fonts/fontawesome/css/all.min.css">
     </head>
