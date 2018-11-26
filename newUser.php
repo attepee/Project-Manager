@@ -3,6 +3,11 @@
     require_once '/home/L9406/PasswordLib.phar';
     $lib = new PasswordLib\PasswordLib();
 
+    if ($_SESSION["admin"] != 1){
+        header("Location: login.php");
+        exit;
+    }
+
     $msg = "";
 
     if (isset($_POST["username"]) AND isset($_POST["firstname"]) AND isset($_POST["lastname"]) AND isset($_POST["password"]) AND isset($_POST["admin"])){
@@ -51,11 +56,8 @@
                         <option value="1">Yes</option>
                     </select>
                     <input type="submit" name="action" value="Create user"><br>
-                    <a href="settings.php"><button>Cancel</button></a>
                 </form>
-                <?php
-                    echo $msg;
-                ?>
+                <a href="settings.php"><button>Cancel</button></a>
             </div>
         </div>
     </body>

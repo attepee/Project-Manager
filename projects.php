@@ -1,10 +1,7 @@
 <?php
     require_once("php/session.php");
 
-    $errmsg = "OK";
-    $userID = $_SESSION["userID"];
-
-    $stmt = $db->query("SELECT projectID, title, due_date, owner FROM projects WHERE owner = '$userID' ORDER BY due_date ASC");
+    $stmt = $db->query("SELECT projectID, title, due_date, owner FROM projects ORDER BY due_date ASC");
 ?>
 
 <html>
@@ -31,7 +28,7 @@
                         while ($row = $stmt->fetch()) {
                             echo "<tr>
                                     <td>".$row['projectID']."</td>
-                                    <td>"."<a href='project.php?projectid=".$row['projectID']."'>".$row['title']."</a>"."</td>
+                                    <td>"."<a href='project.php?projectID=".$row['projectID']."'>".$row['title']."</a>"."</td>
                                     <td>".$row['due_date']."</td>
                                     <td>".$row['owner']."</td>
                                 </a></tr>";

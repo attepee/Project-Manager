@@ -1,7 +1,10 @@
 <?php
     require_once("php/session.php");
+    if ($_SESSION["admin"] != 1){
+        header("Location: login.php");
+        exit;
+    }
 
-    $errmsg = "OK";
     $userID = $_SESSION["userID"];
 
     $stmt = $db->query("SELECT userID, username, firstname, lastname, admin FROM users");

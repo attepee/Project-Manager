@@ -42,6 +42,7 @@
                     <input type="date" name="duedate"><br>
                     <input type="submit" name="action" value="Create project">
                 </form>
+                <a href="projects.php"><button>Cancel</button></a>
             </div>
         </div>
     </body>
