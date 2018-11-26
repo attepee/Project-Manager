@@ -1,3 +1,7 @@
+<?php
+    require_once("php/session.php");
+?>
+
 <html>
     <head>
         <title>Profile | Project Manager</title>
@@ -12,7 +16,7 @@
             <div id="navBar">
                 <ul>
                     <li><a href="logout.php">Logout <i class="fas fa-sign-out-alt"></i></a></li>
-                    <li><a href="profile.php">Profile <i class="fas fa-user"></i></a></li>
+                    <li><a href="profile.php">Settings <i class="fas fa-cog"></i></a></li>
                     <li><a href="statistics.php">Statistics <i class="fas fa-chart-bar"></i></a></li>
                     <li><a href="projects.php">Projects <i class="fas fa-project-diagram"></i></a></li>
                     <li><a href="home.php">Home <i class="fas fa-home"></i></a></li>
