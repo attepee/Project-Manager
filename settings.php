@@ -22,7 +22,7 @@
         ?>
         <div id="container">
             <div class="content">
-                <a href="newUser.php"><button>New user</button></a>
+                <div class="buttonHolder"><a href="newUser.php"><button>New user</button></a></div>
                 <table>
                     <tr>
                         <th>ID</th>
@@ -40,7 +40,7 @@
                                     <td>".$row['firstname']."</td>
                                     <td>".$row['lastname']."</td>
                                     <td>".$row['admin']."</td>
-                                </a></tr>";
+                                </tr>";
                         }
                     ?>
                 </table>

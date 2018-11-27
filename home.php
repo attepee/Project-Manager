@@ -1,10 +1,7 @@
 <?php
     require_once("php/session.php");
 
-    $errmsg = "OK";
     $userID = $_SESSION["userID"];
-
-    $stmt = $db->query("SELECT projectID, title, due_date, owner FROM projects WHERE owner = '$userID' ORDER BY due_date ASC");
 ?>
 
 <html>
@@ -26,19 +23,39 @@
                         <th>Title</th>
                         <th>Due date</th>
                     </tr>
-                    <?php
+                    <?php     
+                        $stmt = $db->query("SELECT projectID, title, due_date FROM projects WHERE owner = '$userID' ORDER BY due_date ASC");
+                    
                         while ($row = $stmt->fetch()) {
                             echo "<tr>
                                     <td>".$row['projectID']."</td>
                                     <td>"."<a href='project.php?projectid=".$row['projectID']."'>".$row['title']."</a>"."</td>
                                     <td>".$row['due_date']."</td>
-                                </a></tr>";
+                                </tr>";
                         }
                     ?>
                 </table>
             </div>
             <div class="content">
                 <h1>Your tasks</h1>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Due date</th>
+                    </tr>
+                <?php
+                    $stmt = $db->query("SELECT taskID, title, due_date, assigned_user FROM tasks WHERE assigned_user = '$userID' ORDER BY due_date ASC");
+                    
+                        while ($row = $stmt->fetch()) {
+                            echo "<tr>
+                                    <td>".$row['taskID']."</td>
+                                    <td>".$row['title']."</td>
+                                    <td>".$row['due_date']."</td>
+                                </tr>";
+                        }
+                ?>
+                </table>
             </div>
             <div class="content">
                 <h1>Hours worked this week</h1>

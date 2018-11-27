@@ -21,7 +21,7 @@
         $sql = "INSERT INTO users ( firstname, lastname, username, password, admin ) VALUES ( '$firstname', '$lastname', '$username', '$hash', '$admin')";
         
         if ($affected_rows = $db->exec($sql) === TRUE){
-            $msg =  "New user created successfully";
+            header("Location: settings.php");
         }
     }
     else{

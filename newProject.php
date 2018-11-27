@@ -13,7 +13,7 @@
         $sql = "INSERT INTO projects ( title, description, create_date, due_date, status, owner ) VALUES ( '$title', '$desc', '$date', '$duedate', 1, '$userID')";
 
         if ($affected_rows = $db->exec($sql) === TRUE){
-            echo "New project created successfully";
+            header("Location: projects.php");
         }
     }
     else{

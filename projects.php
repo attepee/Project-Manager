@@ -15,7 +15,7 @@
             include("header.php");
         ?>
         <div id="container">
-            <a href="newProject.php"><button>New project</button></a>
+            <div class="buttonHolder"><a href="newProject.php"><button>New project</button></a></div>
             <div class="content">
                 <table>
                     <tr>
@@ -31,7 +31,7 @@
                                     <td>"."<a href='project.php?id=".$row['projectID']."'>".$row['title']."</a>"."</td>
                                     <td>".$row['due_date']."</td>
                                     <td>".$row['owner']."</td>
-                                </a></tr>";
+                                </tr>";
                         }
                     ?>
                 </table>
