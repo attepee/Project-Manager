@@ -3,27 +3,46 @@
 
     $id = $_GET["id"];
 
-    //Add notes
-    if (isset($_POST["noteTitle"]) AND isset($_POST["note"]) AND isset($_POST["hours"])){
-        $title = $_POST["noteTitle"];
-        $note = $_POST["note"];
-        $hours = $_POST["hours"];
-        $userID = $_SESSION["userID"];
-        
-        $sql = $db->query("SELECT projectID, owner FROM tasks WHERE taskID = '$id'");
-        $row = $sql->fetch();
-        
-        $projectID = $row['projectID'];
-        $owner = $row['owner'];
 
-        $sql = "INSERT INTO task_notes ( title, note, hours_worked, taskID, projectID, owner, assigned_user ) VALUES ( '$title', '$note', '$hours', '$id' , '$projectID', '$owner','$userID')";
+    switch($_POST["action"]){
+        case "Add note":
+            //Add notes
+            if (isset($_POST["noteTitle"]) AND isset($_POST["note"]) AND isset($_POST["hours"])){
+                $title = $_POST["noteTitle"];
+                $note = $_POST["note"];
+                $hours = $_POST["hours"];
+                $userID = $_SESSION["userID"];
 
-            if ($affected_rows = $db->exec($sql) === TRUE){
-                echo "New note created successfully";
+                $sql = $db->query("SELECT projectID, owner FROM tasks WHERE taskID = '$id'");
+                $row = $sql->fetch();
+
+                $projectID = $row['projectID'];
+                $owner = $row['owner'];
+
+                $sql = "INSERT INTO task_notes ( title, note, hours_worked, taskID, projectID, owner, assigned_user ) VALUES ( '$title', '$note', '$hours', '$id' , '$projectID', '$owner','$userID')";
+
+                if ($affected_rows = $db->exec($sql) === TRUE){
+                    echo "New note created successfully";
+                }
             }
-    }
-    else{
-        $errmsg = "";
+            else{
+                $errmsg = "";
+            }
+            break;
+        case "Remove task":
+            $sql = "DELETE FROM tasks WHERE taskID = '$id'";
+        
+            if ($affected_rows = $db->exec($sql) === TRUE){
+                header("Location: projects.php");
+            }
+            break;
+        case "Close task":
+            $sql = "UPDATE tasks SET status = 0 WHERE taskID = '$id'";
+        
+            if ($affected_rows = $db->exec($sql) === TRUE){
+                header("Location: projects.php");
+            }
+            break;
     }
 ?>
 
@@ -40,8 +59,10 @@
         <div id="container">
             <div class="content">
                 <div class="buttonHolder">
-                    <button>Remove task</button>
-                    <button>Close task</button>
+                    <form id="form" method="post" action="<?php echo "task.php?id=".$id;?>">
+                        <input type=submit name="action" value="Remove task"><br>
+                        <input type="submit" name="action" value="Close task">
+                    </form>
                 </div>
                 <?php
                     //Get Project data
@@ -88,13 +109,7 @@
                 </table>
             </div>
         </div>
-        <script>
-            function removeTask(){
-                <?php
-                    
-                ?>
-            }
-            
+        <script>        
             function showNoteForm(){
                 var id = document.getElementById("noteForm");
                 id.style.display = "block";

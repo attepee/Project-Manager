@@ -1,7 +1,5 @@
 <?php
     require_once("php/session.php");
-
-    $stmt = $db->query("SELECT projectID, title, due_date, owner FROM projects ORDER BY due_date ASC");
 ?>
 
 <html>
@@ -17,6 +15,7 @@
         <div id="container">
             <div class="buttonHolder"><a href="newProject.php"><button>New project</button></a></div>
             <div class="content">
+                <h2>Open projects</h2>
                 <table>
                     <tr>
                         <th>ID</th>
@@ -25,7 +24,30 @@
                         <th>manager</th>
                     </tr>
                     <?php
-                        while ($row = $stmt->fetch()) {
+                        $sql = $db->query("SELECT projectID, title, due_date, owner FROM projects WHERE status = 1 ORDER BY due_date ASC");
+                    
+                        while ($row = $sql->fetch()) {
+                            echo "<tr>
+                                    <td>".$row['projectID']."</td>
+                                    <td>"."<a href='project.php?id=".$row['projectID']."'>".$row['title']."</a>"."</td>
+                                    <td>".$row['due_date']."</td>
+                                    <td>".$row['owner']."</td>
+                                </tr>";
+                        }
+                    ?>
+                </table>
+                <h2>Closed projects</h2>
+                <table class="small">
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Due date</th>
+                        <th>manager</th>
+                    </tr>
+                    <?php
+                        $sql = $db->query("SELECT projectID, title, due_date, owner FROM projects WHERE status = 0 ORDER BY due_date ASC");
+                    
+                        while ($row = $sql->fetch()) {
                             echo "<tr>
                                     <td>".$row['projectID']."</td>
                                     <td>"."<a href='project.php?id=".$row['projectID']."'>".$row['title']."</a>"."</td>

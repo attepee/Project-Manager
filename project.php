@@ -42,6 +42,20 @@
                 $errmsg = "";
             }
             break;
+        case "Remove project":
+            $sql = "DELETE FROM projects WHERE projectID = '$id'";
+            
+            if ($affected_rows = $db->exec($sql) === TRUE){
+                header("Location: projects.php");
+            }
+            break;
+        case "Close project":
+            $sql = "UPDATE projects SET status = 0 WHERE projectID = '$id'";
+        
+            if ($affected_rows = $db->exec($sql) === TRUE){
+                header("Location: projects.php");
+            }
+            break;
     }
 ?>
 
@@ -58,13 +72,15 @@
         <div id="container">
             <div class="content">
                 <div class="buttonHolder">
-                    <button>Remove project</button>
-                    <button>Close project</button>
+                    <form id="form" method="post" action="<?php echo "project.php?id=".$id;?>">
+                        <input type=submit name="action" value="Remove project"><br>
+                        <input type="submit" name="action" value="Close project">
+                    </form>
                 </div>
                 <?php
                     //Get Project data
-                    $stmt = $db->query("SELECT * FROM projects WHERE projectID = '$id'");
-                    $row = $stmt->fetch();
+                    $sql = $db->query("SELECT * FROM projects WHERE projectID = '$id'");
+                    $row = $sql->fetch();
                 
                     echo "<h1>".$row['title']."</h1>
                         <p class='small'>Project created ".$row['create_date']."</p>
@@ -89,9 +105,9 @@
                     </tr>
                 <?php
                     //Get notes
-                    $stmt = $db->query("SELECT * FROM project_notes WHERE projectID = '$id'");
+                    $sql = $db->query("SELECT * FROM project_notes WHERE projectID = '$id'");
                 
-                    while ($row = $stmt->fetch()) {
+                    while ($row = $sql->fetch()) {
                         echo "<tr>
                                 <td>".$row['project_noteID']."</td>
                                 <td>".$row['title']."</td>
@@ -111,9 +127,9 @@
                     <select name="user">
                     <?php
                         //Get list of users
-                        $stmt = $db->query("SELECT userID, username FROM users");
+                        $sql = $db->query("SELECT userID, username FROM users");
                     
-                        while ($row = $stmt->fetch()) {
+                        while ($row = $sql->fetch()) {
                             echo "<option value='".$row['userID']."'>".$row['username']."</option>";
                         }
                     ?>
@@ -131,9 +147,9 @@
                     </tr>
                 <?php
                     //Get open tasks
-                    $stmt = $db->query("SELECT * FROM tasks WHERE projectID = '$id' and status = 1");
+                    $sql = $db->query("SELECT * FROM tasks WHERE projectID = '$id' and status = 1");
                 
-                    while ($row = $stmt->fetch()) {
+                    while ($row = $sql->fetch()) {
                         echo "<tr>
                                 <td>".$row['taskID']."</td>
                                 <td>"."<a href='task.php?id=".$row['taskID']."'>".$row['title']."</a>"."</td>
@@ -153,9 +169,9 @@
                     </tr>
                 <?php
                     //Get closed tasks
-                    $stmt = $db->query("SELECT * FROM tasks WHERE projectID = '$id' and status = 0");
+                    $sql = $db->query("SELECT * FROM tasks WHERE projectID = '$id' and status = 0");
                 
-                    while ($row = $stmt->fetch()) {
+                    while ($row = $sql->fetch()) {
                         echo "<tr>
                                 <td>".$row['taskID']."</td>
                                 <td>"."<a href='task.php?id=".$row['taskID']."'>".$row['title']."</a>"."</td>

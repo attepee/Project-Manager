@@ -4,9 +4,10 @@
 
     $username = $_SESSION["username"];
 
-    $user = $db->query("SELECT userID, admin from users WHERE username = '$username'")->fetch();
-    $_SESSION["userID"] = $user[0];
-    $_SESSION["admin"] = $user[1];
+    $user = $db->query("SELECT firstname, userID, admin from users WHERE username = '$username'")->fetch();
+    $_SESSION["firstname"] = $user[0];
+    $_SESSION["userID"] = $user[1];
+    $_SESSION["admin"] = $user[2];
 
     if (!isset($_SESSION["app2_islogged"]) || $_SESSION["app2_islogged"] !== true) {
         header("Location: login.php");
