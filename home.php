@@ -25,7 +25,7 @@
                         <th>Due date</th>
                     </tr>
                     <?php     
-                        $sql = $db->query("SELECT projectID, title, due_date FROM projects WHERE owner = '$userID' ORDER BY due_date ASC");
+                        $sql = $db->query("SELECT projectID, title, due_date FROM projects WHERE owner = '$userID' AND status = 1 ORDER BY due_date ASC");
                     
                         while ($row = $sql->fetch()) {
                             echo "<tr>
@@ -46,7 +46,7 @@
                         <th>Due date</th>
                     </tr>
                 <?php
-                    $sql = $db->query("SELECT taskID, title, due_date, assigned_user FROM tasks WHERE assigned_user = '$userID' ORDER BY due_date ASC");
+                    $sql = $db->query("SELECT taskID, title, due_date FROM tasks WHERE assigned_user = '$userID' AND status = 1 ORDER BY due_date ASC");
                     
                         while ($row = $sql->fetch()) {
                             echo "<tr>
