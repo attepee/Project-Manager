@@ -1,8 +1,8 @@
 <?php
+    ob_start();
     require_once("php/session.php");
 
-    $errmsg = "OK";
-
+    // If fields are filled...
     if (isset($_POST["title"]) AND isset($_POST["desc"]) AND isset($_POST["duedate"])){
         $title = $_POST["title"];
         $desc = $_POST["desc"];
@@ -10,14 +10,11 @@
         $duedate = $_POST["duedate"];
         $userID = $_SESSION["userID"];
 
+        // insert into db
         $sql = "INSERT INTO projects ( title, description, create_date, due_date, status, owner ) VALUES ( '$title', '$desc', '$date', '$duedate', 1, '$userID')";
 
-        if ($affected_rows = $db->exec($sql) === TRUE){
-            header("Location: projects.php");
-        }
-    }
-    else{
-        $errmsg = "";
+        $db->exec($sql);
+        header("Location: projects.php");
     }
 ?>
 
@@ -42,7 +39,9 @@
                     <input type="date" name="duedate"><br>
                     <input type="submit" name="action" value="Create project">
                 </form>
-                <a href="projects.php"><button>Cancel</button></a>
+                <form action="projects.php">
+                    <button>Cancel</button>
+                </form>
             </div>
         </div>
     </body>

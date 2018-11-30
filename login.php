@@ -4,25 +4,24 @@
     require_once "/home/L9406/PasswordLib.phar";
     $lib = new PasswordLib\PasswordLib();
 
-    $errmsg = "OK";
+    // If fields are filled..
     if (isset($_POST["username"]) AND isset($_POST["password"])){
         $username = $_POST["username"];
         $password = $_POST["password"];
 
+        // get user from db
         $sql = "SELECT userID, username, password FROM users WHERE username = :username";
 
-        $stmt = $db->prepare($sql);
-        $stmt->execute(array($username));
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $sql = $db->prepare($sql);
+        $sql->execute(array($username));
+        $row = $sql->fetch(PDO::FETCH_ASSOC);
 
-        if ($stmt->rowCount() == 1 AND $lib->verifyPasswordHash($password, $row["password"])){
+        // and login if one user is found and password is right
+        if ($sql->rowCount() == 1 AND $lib->verifyPasswordHash($password, $row["password"])){
             $_SESSION["app2_islogged"] = true;
             $_SESSION["username"] = $_POST["username"];
             header("Location: home.php");
         }
-    }
-    else{
-        $errmsg = "<span>Username or password wrong</span>";
     }
 ?>
 

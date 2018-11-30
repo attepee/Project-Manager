@@ -3,7 +3,6 @@
 
     $id = $_GET["id"];
 
-
     switch($_POST["action"]){
         case "Add note":
             //Add notes
@@ -21,28 +20,22 @@
 
                 $sql = "INSERT INTO task_notes ( title, note, hours_worked, taskID, projectID, owner, assigned_user ) VALUES ( '$title', '$note', '$hours', '$id' , '$projectID', '$owner','$userID')";
 
-                if ($affected_rows = $db->exec($sql) === TRUE){
-                    echo "New note created successfully";
-                }
-            }
-            else{
-                $errmsg = "";
+                $db->exec($sql);
             }
             break;
         case "Remove task":
+            //Remove task and redirect
             $sql = "DELETE FROM tasks WHERE taskID = '$id'";
         
-            if ($affected_rows = $db->exec($sql) === TRUE){
-                header("Location: projects.php");
-            }
+            $db->exec($sql);
+            header("Location: projects.php");
             break;
         case "Close task":
+            //Close task and redirect
             $sql = "UPDATE tasks SET status = 0 WHERE taskID = '$id'";
         
-            if ($affected_rows = $db->exec($sql) === TRUE){
-                header("Location: projects.php");
-            }
-            break;
+            $db->exec($sql);
+            header("Location: projects.php");
     }
 ?>
 
@@ -65,7 +58,7 @@
                     </form>
                 </div>
                 <?php
-                    //Get Project data
+                    //Get task data
                     $sql = $db->query("SELECT * FROM tasks WHERE taskID = '$id'");
                     $row = $sql->fetch();
                 
@@ -94,7 +87,7 @@
                         <th>Hours Worked</th>
                     </tr>
                 <?php
-                    //Get notes
+                    //Get task notes
                     $sql = $db->query("SELECT task_noteID, title, note, hours_worked FROM task_notes WHERE taskID = '$id'");
                     
                     while ($row = $sql->fetch()) {
@@ -109,7 +102,7 @@
                 </table>
             </div>
         </div>
-        <script>        
+        <script>   
             function showNoteForm(){
                 var id = document.getElementById("noteForm");
                 id.style.display = "block";

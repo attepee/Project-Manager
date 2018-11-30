@@ -24,13 +24,14 @@
                         <th>Title</th>
                         <th>Due date</th>
                     </tr>
-                    <?php     
+                    <?php
+                        // Get users projects
                         $sql = $db->query("SELECT projectID, title, due_date FROM projects WHERE owner = '$userID' AND status = 1 ORDER BY due_date ASC");
                     
                         while ($row = $sql->fetch()) {
                             echo "<tr>
                                     <td>".$row['projectID']."</td>
-                                    <td>"."<a href='project.php?projectid=".$row['projectID']."'>".$row['title']."</a>"."</td>
+                                    <td>"."<a href='project.php?id=".$row['projectID']."'>".$row['title']."</a>"."</td>
                                     <td>".$row['due_date']."</td>
                                 </tr>";
                         }
@@ -46,12 +47,13 @@
                         <th>Due date</th>
                     </tr>
                 <?php
+                    // Get users tasks
                     $sql = $db->query("SELECT taskID, title, due_date FROM tasks WHERE assigned_user = '$userID' AND status = 1 ORDER BY due_date ASC");
                     
                         while ($row = $sql->fetch()) {
                             echo "<tr>
                                     <td>".$row['taskID']."</td>
-                                    <td>".$row['title']."</td>
+                                    <td>"."<a href='task.php?id=".$row['taskID']."'>".$row['title']."</a>"."</td>
                                     <td>".$row['due_date']."</td>
                                 </tr>";
                         }
@@ -61,6 +63,7 @@
             <div class="content">
                 <h2>Hours worked</h2>
                 <?php
+                    // Get users hours
                     $hours = 0;
                     $sql = $db->query("SELECT SUM(hours_worked) as sum FROM task_notes WHERE assigned_user = '$userID'");
 

@@ -1,8 +1,6 @@
 <?php
     require_once("php/session.php");
 
-    $errmsg = "";
-
     $id = $_GET["id"];
 
     //Add notes and tasks
@@ -19,9 +17,6 @@
                     echo "New note created successfully";
                 }
             }
-            else{
-                $errmsg = "";
-            }
             break;
         case "Add task":
             if (isset($_POST["taskTitle"]) AND isset($_POST["description"]) AND isset($_POST["duedate"]) AND isset($_POST["user"])){
@@ -34,27 +29,20 @@
 
                 $sql = "INSERT INTO tasks ( title, description, create_date, due_date, status, projectID, owner, assigned_user ) VALUES ( '$title', '$desc', '$date', '$duedate', '1', '$id', '$owner', '$user')";
 
-                if ($affected_rows = $db->exec($sql) === TRUE){
-                    echo "New project created successfully";
-                }
-            }
-            else{
-                $errmsg = "";
+                $db->exec($sql);
             }
             break;
         case "Remove project":
             $sql = "DELETE FROM projects WHERE projectID = '$id'";
             
-            if ($affected_rows = $db->exec($sql) === TRUE){
-                header("Location: projects.php");
-            }
+            $db->exec($sql);
+            header("Location: projects.php");
             break;
         case "Close project":
             $sql = "UPDATE projects SET status = 0 WHERE projectID = '$id'";
         
-            if ($affected_rows = $db->exec($sql) === TRUE){
-                header("Location: projects.php");
-            }
+            $db->exec($sql);
+            header("Location: projects.php");
             break;
     }
 ?>
@@ -147,7 +135,7 @@
                     </tr>
                 <?php
                     //Get open tasks
-                    $sql = $db->query("SELECT * FROM tasks WHERE projectID = '$id' and status = 1");
+                    $sql = $db->query("SELECT * FROM tasks WHERE projectID = '$id' and status = 1 ORDER BY due_date ASC");
                 
                     while ($row = $sql->fetch()) {
                         echo "<tr>
@@ -169,7 +157,7 @@
                     </tr>
                 <?php
                     //Get closed tasks
-                    $sql = $db->query("SELECT * FROM tasks WHERE projectID = '$id' and status = 0");
+                    $sql = $db->query("SELECT * FROM tasks WHERE projectID = '$id' and status = 0 ORDER BY due_date ASC");
                 
                     while ($row = $sql->fetch()) {
                         echo "<tr>
@@ -183,13 +171,7 @@
                 </table>
             </div>
         </div>
-        <script>
-            function removeProject(){
-                <?php
-                    
-                ?>
-            }
-            
+        <script>    
             function showNoteForm(){
                 var id = document.getElementById("noteForm");
                 id.style.display = "block";

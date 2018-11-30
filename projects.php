@@ -13,7 +13,11 @@
             include("header.php");
         ?>
         <div id="container">
-            <div class="buttonHolder"><a href="newProject.php"><button>New project</button></a></div>
+            <div class="buttonHolder">
+                <form id="form" action="newProject.php">
+                    <button>New project</button>
+                </form>
+            </div>
             <div class="content">
                 <h2>Open projects</h2>
                 <table>
@@ -24,6 +28,7 @@
                         <th>manager</th>
                     </tr>
                     <?php
+                        // Get open projects
                         $sql = $db->query("SELECT projectID, title, due_date, owner FROM projects WHERE status = 1 ORDER BY due_date ASC");
                     
                         while ($row = $sql->fetch()) {
@@ -45,6 +50,7 @@
                         <th>manager</th>
                     </tr>
                     <?php
+                        // Get closed projects
                         $sql = $db->query("SELECT projectID, title, due_date, owner FROM projects WHERE status = 0 ORDER BY due_date ASC");
                     
                         while ($row = $sql->fetch()) {

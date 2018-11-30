@@ -3,13 +3,13 @@
     require_once '/home/L9406/PasswordLib.phar';
     $lib = new PasswordLib\PasswordLib();
 
+    //redirect to login if user is not admin
     if ($_SESSION["admin"] != 1){
         header("Location: login.php");
         exit;
     }
 
-    $msg = "";
-
+    //if fields are filled...
     if (isset($_POST["username"]) AND isset($_POST["firstname"]) AND isset($_POST["lastname"]) AND isset($_POST["password"]) AND isset($_POST["admin"])){
         $firstname = $_POST["firstname"];
         $lastname = $_POST["lastname"];
@@ -18,14 +18,11 @@
         $admin = $_POST["admin"];
         $hash = $lib->createPasswordHash($password, '$2a$', array('cost' => 12));
         
+        //insert into db
         $sql = "INSERT INTO users ( firstname, lastname, username, password, admin ) VALUES ( '$firstname', '$lastname', '$username', '$hash', '$admin')";
         
-        if ($affected_rows = $db->exec($sql) === TRUE){
-            header("Location: settings.php");
-        }
-    }
-    else{
-        $msg = "";
+        $db->exec($sql);
+        header("Location: settings.php");
     }
 ?>
 
@@ -57,7 +54,9 @@
                     </select>
                     <input type="submit" name="action" value="Create user"><br>
                 </form>
-                <a href="settings.php"><button>Cancel</button></a>
+                <form action="settings.php">
+                    <button>Cancel</button>
+                </form>
             </div>
         </div>
     </body>

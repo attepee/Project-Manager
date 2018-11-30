@@ -6,8 +6,6 @@
     }
 
     $userID = $_SESSION["userID"];
-
-    $stmt = $db->query("SELECT userID, username, firstname, lastname, admin FROM users");
 ?>
 
 <html>
@@ -22,7 +20,11 @@
         ?>
         <div id="container">
             <div class="content">
-                <div class="buttonHolder"><a href="newUser.php"><button>New user</button></a></div>
+                <div class="buttonHolder">
+                    <form id="form" action="newUser.php">
+                        <button>New user</button>
+                    </form>
+                </div>
                 <table>
                     <tr>
                         <th>ID</th>
@@ -33,10 +35,12 @@
                         <th></th>
                     </tr>
                     <?php
-                        while ($row = $stmt->fetch()) {
+                        $sql = $db->query("SELECT userID, username, firstname, lastname, admin FROM users");
+                    
+                        while ($row = $sql->fetch()) {
                             echo "<tr>
                                     <td>".$row['userID']."</td>
-                                    <td>"."<a href='.php?userID=".$row['userID']."'>".$row['username']."</a>"."</td>
+                                    <td>"."<a href='user.php?id=".$row['userID']."'>".$row['username']."</a>"."</td>
                                     <td>".$row['firstname']."</td>
                                     <td>".$row['lastname']."</td>
                                     <td>".$row['admin']."</td>
